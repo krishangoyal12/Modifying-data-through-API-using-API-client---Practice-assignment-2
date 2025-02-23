@@ -34,18 +34,18 @@ app.put('/menu/:id', async(req,res)=>{
   const {name, description,price} = req.body
 
   try {
-    const updatedItem = menuModel.findByIdAndUpdate(id ,{name, description, price}, {new:true})
+    const updatedItem = await menuModel.findByIdAndUpdate(id ,{name, description, price}, {new:true})
     if(!updatedItem){
       res.status(400).json({
         succes:false,
         message: `Item with ${id} not found`,
-        Updated_Item: updatedItem
       })
     }
     else{
       res.status(200).json({
         success: true,
-        message: 'Item update successful'
+        message: 'Item update successful',
+        Updated_Item: updatedItem
       })
     }
 
